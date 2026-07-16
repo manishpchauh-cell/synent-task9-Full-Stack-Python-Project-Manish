@@ -1,0 +1,76 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h2>Welcome {{ user.username }}</h2>
+
+<a class="btn" href="{% url 'add_task' %}">
++ Add Task
+</a>
+
+<hr>
+
+{% for task in tasks %}
+
+<div class="card">
+
+<h3>{{ task.title }}</h3>
+
+<p>
+
+{{ task.description }}
+
+</p>
+
+<p>
+
+Status :
+
+{% if task.completed %}
+
+<span class="complete">
+
+Completed
+
+</span>
+
+{% else %}
+
+<span class="pending">
+
+Pending
+
+</span>
+
+{% endif %}
+
+</p>
+
+<a href="{% url 'edit_task' task.id %}">
+
+Edit
+
+</a>
+
+|
+
+<a href="{% url 'delete_task' task.id %}">
+
+Delete
+
+</a>
+
+</div>
+
+{% empty %}
+
+<p>No Tasks Available</p>
+
+{% endfor %}
+
+{% endblock %}
+<input
+    type="text"
+    id="searchTask"
+    placeholder="Search Task..."
+>
